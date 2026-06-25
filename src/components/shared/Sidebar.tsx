@@ -12,14 +12,15 @@ import {
   MessageSquareCode, 
   Zap,
   Flame,
-  Clock
+  Clock,
+  X
 } from 'lucide-react';
 import { useGateStore } from '@/store/useGateStore';
 import { getSubjectHours } from '@/utils/plannerAlgorithm';
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const { subjects, resources, habits, preferences, hasHydrated } = useGateStore();
+  const { subjects, resources, habits, preferences, hasHydrated, isSidebarOpen, setSidebarOpen } = useGateStore();
 
   const navItems = [
     { name: 'Dashboard', href: '/', icon: LayoutDashboard },
@@ -54,17 +55,38 @@ export default function Sidebar() {
   const stats = getSidebarStats();
 
   return (
-    <aside className="w-64 border-r border-zinc-800/80 bg-zinc-950/50 backdrop-blur-xl flex flex-col h-screen sticky top-0">
-      {/* Brand Header */}
-      <div className="p-6 border-b border-zinc-900 flex items-center gap-2.5">
-        <div className="w-8 h-8 rounded-lg gradient-accent flex items-center justify-center glow-primary">
-          <Zap className="w-4 h-4 text-white fill-white" />
+    <>
+      {/* Backdrop overlay for mobile screen when sidebar is open */}
+      {isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/65 backdrop-blur-sm z-40 md:hidden animate-fade-in"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+      <aside className={`w-64 border-r border-zinc-800/80 bg-zinc-950/80 md:bg-zinc-950/50 backdrop-blur-xl flex flex-col h-screen fixed md:sticky top-0 left-0 z-50 transition-transform duration-300 md:transform-none ${
+        isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+      }`}>
+        {/* Brand Header */}
+        <div className="p-6 border-b border-zinc-900 flex items-center justify-between gap-2.5">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg gradient-accent flex items-center justify-center glow-primary">
+              <Zap className="w-4 h-4 text-white fill-white" />
+            </div>
+            <div>
+              <h1 className="text-sm font-extrabold tracking-tight text-white leading-none">GATE 2027</h1>
+              <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider">AI Command Center</span>
+            </div>
+          </div>
+          
+          {/* Close button for mobile drawer */}
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="p-1 rounded-lg text-zinc-500 hover:text-white bg-zinc-900/50 border border-zinc-800 md:hidden transition"
+            aria-label="Close menu"
+          >
+            <X className="w-4 h-4" />
+          </button>
         </div>
-        <div>
-          <h1 className="text-sm font-extrabold tracking-tight text-white leading-none">GATE 2027</h1>
-          <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider">AI Command Center</span>
-        </div>
-      </div>
 
       {/* Nav Links */}
       <nav className="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
@@ -76,6 +98,7 @@ export default function Sidebar() {
             <Link 
               key={item.href} 
               href={item.href}
+              onClick={() => setSidebarOpen(false)}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium transition-all group ${
                 isActive 
                   ? 'bg-purple-600/15 border border-purple-500/25 text-purple-200' 
@@ -108,5 +131,6 @@ export default function Sidebar() {
         </div>
       </div>
     </aside>
+    </>
   );
 }

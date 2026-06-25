@@ -149,7 +149,7 @@ export default function PlannerPage() {
   };
 
   return (
-    <div className="p-6 lg:p-8 flex flex-col xl:flex-row gap-6 max-w-[1600px] mx-auto w-full">
+    <div className="p-4 sm:p-6 lg:p-8 flex flex-col xl:flex-row gap-6 max-w-[1600px] mx-auto w-full">
       
       {/* LEFT SECTION: AI Plan Parameters & Simulation Sliders */}
       <div className="w-full xl:w-96 flex flex-col gap-6 shrink-0">
@@ -312,7 +312,7 @@ export default function PlannerPage() {
       <div className="flex-1 flex flex-col gap-6 overflow-hidden">
         
         {/* View Switcher Header */}
-        <div className="glass-card p-4 rounded-xl border border-zinc-800 flex justify-between items-center">
+        <div className="glass-card p-4 rounded-xl border border-zinc-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h3 className="text-xs uppercase tracking-wider font-extrabold text-white">AI Generated Preparation Roadmap</h3>
             <p className="text-[10px] text-zinc-500 font-medium">Topologically ordered based on course dependencies & weightages</p>

@@ -31,13 +31,13 @@ const Youtube = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 export default function ResourceManagerPage() {
-  const { subjects, resources, addResource, updateResource, deleteResource, preferences } = useGateStore();
+  const { subjects, resources, addResource, updateResource, deleteResource, preferences, hasHydrated } = useGateStore();
   
   // Search & Filter State
   const [searchTerm, setSearchTerm] = useState('');
   const [subjectFilter, setSubjectFilter] = useState('all');
   const [typeFilter, setTypeFilter] = useState('all');
-
+  
   // New Manual Resource Form State
   const [manualRes, setManualRes] = useState({
     subjectId: '',
@@ -62,6 +62,14 @@ export default function ResourceManagerPage() {
     avgDurationMin: number;
     totalDurationHour: number;
   } | null>(null);
+
+  if (!hasHydrated) {
+    return (
+      <div className="p-8 text-center text-zinc-500 font-semibold uppercase animate-pulse">
+        Initializing Resource Manager...
+      </div>
+    );
+  }
 
   // Speed matrix calculations helper
   const getSpeedMatrix = (totalHours: number) => {
@@ -210,7 +218,7 @@ export default function ResourceManagerPage() {
   });
 
   return (
-    <div className="p-6 lg:p-8 flex flex-col lg:flex-row gap-6 max-w-[1600px] mx-auto w-full">
+    <div className="p-4 sm:p-6 lg:p-8 flex flex-col lg:flex-row gap-6 max-w-[1600px] mx-auto w-full">
       
       {/* LEFT SECTION: Inputs & YouTube Playlist Analyzer */}
       <div className="w-full lg:w-96 flex flex-col gap-6 shrink-0">

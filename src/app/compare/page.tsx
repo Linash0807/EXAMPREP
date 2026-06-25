@@ -39,10 +39,10 @@ export default function ComparePage() {
   const comp = getComparison();
 
   return (
-    <div className="p-6 lg:p-8 flex flex-col gap-6 max-w-[1600px] mx-auto w-full">
+    <div className="p-4 sm:p-6 lg:p-8 flex flex-col gap-6 max-w-[1600px] mx-auto w-full">
       
       {/* HEADER INFO */}
-      <div className="glass-panel p-6 rounded-2xl border border-purple-500/10 flex justify-between items-center">
+      <div className="glass-panel p-6 rounded-2xl border border-purple-500/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h2 className="text-sm font-extrabold text-white uppercase tracking-wider mb-1 flex items-center gap-1.5">
             <GitCompare className="w-4 h-4 text-purple-400" />

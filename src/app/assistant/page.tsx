@@ -162,7 +162,7 @@ Let me know if you want me to analyze your specific subjects, timeline feasibili
   };
 
   return (
-    <div className="p-6 lg:p-8 flex flex-col gap-6 max-w-[1000px] mx-auto w-full h-[calc(100vh-5rem)]">
+    <div className="p-4 sm:p-6 lg:p-8 flex flex-col gap-6 max-w-[1000px] mx-auto w-full h-[calc(100vh-5rem)]">
       
       {/* HEADER CARD */}
       <div className="glass-panel p-4 rounded-xl border border-purple-500/10 flex items-center justify-between shrink-0">
@@ -184,7 +184,7 @@ Let me know if you want me to analyze your specific subjects, timeline feasibili
           return (
             <div 
               key={msg.id} 
-              className={`flex gap-3 max-w-[80%] ${isAI ? 'self-start' : 'self-end flex-row-reverse'}`}
+              className={`flex gap-3 max-w-[90%] md:max-w-[80%] ${isAI ? 'self-start' : 'self-end flex-row-reverse'}`}
             >
               {/* Avatar */}
               <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border ${

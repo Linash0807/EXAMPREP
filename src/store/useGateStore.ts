@@ -71,9 +71,12 @@ export interface GateState {
   habits: Habit[];
   preferences: UserPreferences;
   hasHydrated: boolean;
+  isSidebarOpen: boolean;
   
   // Hydration helper
   setHasHydrated: (state: boolean) => void;
+  toggleSidebar: () => void;
+  setSidebarOpen: (open: boolean) => void;
   
   // Preferences actions
   updatePreferences: (prefs: Partial<UserPreferences>) => void;
@@ -110,8 +113,11 @@ export const useGateStore = create<GateState>()(
       habits: DEFAULT_HABITS,
       preferences: DEFAULT_PREFERENCES,
       hasHydrated: false,
+      isSidebarOpen: false,
 
       setHasHydrated: (state) => set({ hasHydrated: state }),
+      toggleSidebar: () => set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
+      setSidebarOpen: (open) => set({ isSidebarOpen: open }),
 
       updatePreferences: (prefs) => {
         set((state) => {

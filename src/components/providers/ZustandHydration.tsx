@@ -8,8 +8,11 @@ export default function ZustandHydration({ children }: { children: React.ReactNo
 
   useEffect(() => {
     // Manually trigger hydration on mount to prevent SSR mismatch
-    useGateStore.persist.rehydrate();
-    setHasHydrated(true);
+    const hydrate = async () => {
+      await useGateStore.persist.rehydrate();
+      setHasHydrated(true);
+    };
+    hydrate();
   }, [setHasHydrated]);
 
   return <>{children}</>;

@@ -108,7 +108,7 @@ export default function DashboardPage() {
   const currentStudyPriority = getStudyRecommendation();
 
   return (
-    <div className="p-6 lg:p-8 flex flex-col xl:flex-row gap-6 max-w-[1600px] mx-auto w-full">
+    <div className="p-4 sm:p-6 lg:p-8 flex flex-col xl:flex-row gap-6 max-w-[1600px] mx-auto w-full">
       {/* LEFT PANEL: Core Dashboard Widgets */}
       <div className="flex-1 flex flex-col gap-6">
         

@@ -1,13 +1,13 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { Clock, Play, HelpCircle, Bell, Settings } from 'lucide-react';
+import { Clock, Play, HelpCircle, Bell, Settings, Menu } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useGateStore } from '@/store/useGateStore';
 
 export default function Header() {
   const pathname = usePathname();
-  const { preferences, hasHydrated } = useGateStore();
+  const { preferences, hasHydrated, toggleSidebar } = useGateStore();
   const [timeStr, setTimeStr] = useState('');
 
   // Clock ticks every second
@@ -52,11 +52,20 @@ export default function Header() {
   };
 
   return (
-    <header className="h-16 border-b border-zinc-900 bg-zinc-950/20 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-40">
-      {/* Title */}
-      <div>
-        <h2 className="text-sm font-extrabold text-white tracking-tight uppercase">{getPageTitle()}</h2>
-        <p className="text-[10px] text-zinc-500 font-medium">GATE 2027 Preparation Portal</p>
+    <header className="h-16 border-b border-zinc-900 bg-zinc-950/20 backdrop-blur-md px-4 md:px-6 flex items-center justify-between sticky top-0 z-40">
+      {/* Title & Mobile Hamburger Menu */}
+      <div className="flex items-center gap-3">
+        <button
+          onClick={() => toggleSidebar()}
+          className="p-1.5 rounded-lg text-zinc-400 hover:text-white bg-zinc-900/50 border border-zinc-800 md:hidden transition active:scale-95"
+          aria-label="Open Navigation Menu"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+        <div>
+          <h2 className="text-sm font-extrabold text-white tracking-tight uppercase">{getPageTitle()}</h2>
+          <p className="text-[10px] text-zinc-500 font-medium">GATE 2027 Preparation Portal</p>
+        </div>
       </div>
 
       {/* Right Toolbar */}

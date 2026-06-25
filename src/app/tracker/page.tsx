@@ -125,10 +125,10 @@ export default function TrackerPage() {
   );
 
   return (
-    <div className="p-6 lg:p-8 flex flex-col gap-6 max-w-[1600px] mx-auto w-full">
+    <div className="p-4 sm:p-6 lg:p-8 flex flex-col gap-6 max-w-[1600px] mx-auto w-full">
       
       {/* TABS HEADER */}
-      <div className="flex border-b border-zinc-900 pb-px">
+      <div className="flex flex-wrap border-b border-zinc-900 pb-px">
         <button
           onClick={() => setActiveTab('pyqs')}
           className={`px-6 py-3 text-sm font-extrabold uppercase tracking-wider transition-all flex items-center gap-2 border-b-2 ${
@@ -489,51 +489,53 @@ export default function TrackerPage() {
 
             {/* List of Mock Tests */}
             <div className="glass-panel rounded-xl border border-zinc-850 overflow-hidden">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="border-b border-zinc-900 bg-zinc-900/30 text-[10px] text-zinc-400 font-extrabold uppercase tracking-wider">
-                    <th className="p-4">Mock Test details</th>
-                    <th className="p-4">Test Date</th>
-                    <th className="p-4 text-center">Score (100)</th>
-                    <th className="p-4 text-center">All India Rank</th>
-                    <th className="p-4 text-center">Accuracy %</th>
-                    <th className="p-4 text-right">Delete</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-zinc-900 text-xs text-zinc-300">
-                  {mockTests.length > 0 ? (
-                    mockTests.map((mt) => (
-                      <tr key={mt.id} className="hover:bg-zinc-950/20 transition-all">
-                        <td className="p-4 font-extrabold text-white">{mt.name}</td>
-                        <td className="p-4 font-mono text-[11px] text-zinc-400">
-                          {new Date(mt.date).toLocaleDateString('en-IN', {
-                            day: 'numeric',
-                            month: 'short',
-                            year: 'numeric'
-                          })}
-                        </td>
-                        <td className="p-4 text-center font-bold font-mono text-purple-300">{mt.score}</td>
-                        <td className="p-4 text-center font-bold font-mono text-blue-300">#{mt.rank}</td>
-                        <td className="p-4 text-center font-bold font-mono text-emerald-400">{mt.accuracy}%</td>
-                        <td className="p-4 text-right">
-                          <button 
-                            onClick={() => deleteMockTest(mt.id)}
-                            className="p-1.5 rounded hover:bg-red-950/20 text-zinc-650 hover:text-red-400 transition"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="border-b border-zinc-900 bg-zinc-900/30 text-[10px] text-zinc-400 font-extrabold uppercase tracking-wider">
+                      <th className="p-4">Mock Test details</th>
+                      <th className="p-4">Test Date</th>
+                      <th className="p-4 text-center">Score (100)</th>
+                      <th className="p-4 text-center">All India Rank</th>
+                      <th className="p-4 text-center">Accuracy %</th>
+                      <th className="p-4 text-right">Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-zinc-900 text-xs text-zinc-300">
+                    {mockTests.length > 0 ? (
+                      mockTests.map((mt) => (
+                        <tr key={mt.id} className="hover:bg-zinc-950/20 transition-all">
+                          <td className="p-4 font-extrabold text-white">{mt.name}</td>
+                          <td className="p-4 font-mono text-[11px] text-zinc-400">
+                            {new Date(mt.date).toLocaleDateString('en-IN', {
+                              day: 'numeric',
+                              month: 'short',
+                              year: 'numeric'
+                            })}
+                          </td>
+                          <td className="p-4 text-center font-bold font-mono text-purple-300">{mt.score}</td>
+                          <td className="p-4 text-center font-bold font-mono text-blue-300">#{mt.rank}</td>
+                          <td className="p-4 text-center font-bold font-mono text-emerald-400">{mt.accuracy}%</td>
+                          <td className="p-4 text-right">
+                            <button 
+                              onClick={() => deleteMockTest(mt.id)}
+                              className="p-1.5 rounded hover:bg-red-950/20 text-zinc-650 hover:text-red-400 transition"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan={6} className="p-8 text-center text-zinc-500 font-semibold">
+                          No Mock Test entries recorded yet.
                         </td>
                       </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan={6} className="p-8 text-center text-zinc-500 font-semibold">
-                        No Mock Test entries recorded yet.
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
 
           </div>
